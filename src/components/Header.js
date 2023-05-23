@@ -1,6 +1,8 @@
 const Header = () => {
     return (
-        <h1>COIN WATCHER</h1> 
+        <header>
+            <h1>COIN WATCHER</h1> 
+        </header>
     )
 }
 
