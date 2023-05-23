@@ -1,5 +1,8 @@
 import './App.css';
 import Header from './components/Header';
+import CoinButton from './components/CoinButton';
+import Results from './components/Results';
+import BuyButton from './components/BuyButton';
 import Footer from './components/Footer';
 
 function App() {
@@ -7,6 +10,7 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
+        <Results />
       </div>
     
       <Footer />

@@ -15,7 +15,6 @@ img {max-width: 100%; display: block;}
   margin: 0 auto;
 }
 
-
 /* COLORS AND FONTS */
 body {
   background-color: black;
@@ -26,10 +25,42 @@ h1 {
   font-size: 2.5rem;
 }
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
 h1, p {
   color: white;
 }
 
+.title,
+.footer-text {
+  color: #FFD705;
+}
+
+/* RESULTS */
+.results {
+  background-color: #0B1043;
+  height: 65vh;
+  padding: 20px;
+}
+
+.title, .data {
+  background-color: #900F0F;
+  padding: 10px;
+} 
+
+.title {
+  width: 25%;
+  text-align: center;
+}
+
+.data {
+  height: 50vh;
+}
+
+/* FOOTER */
 footer {
   position: absolute;
   text-align: center;
@@ -38,6 +69,5 @@ footer {
   background-color: #900F0F;
 }
 
-.footer-text {
-  color: #FFD705 ;
-}
+
+/* RESULTS FORMATTING */
