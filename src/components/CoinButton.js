@@ -1,6 +1,6 @@
-const CoinButton = () => {
+const CoinButton = (props) => {
     return (
-        console.log("Yes")
+        <button className="crypto-button"><img src={props.logo} alt="currency logo"/></button>
     )
 }
 

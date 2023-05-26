@@ -1,4 +1,6 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 import Header from './components/Header';
 import CoinButton from './components/CoinButton';
 import Results from './components/Results';
@@ -6,6 +8,21 @@ import BuyButton from './components/BuyButton';
 import Footer from './components/Footer';
 
 function App() {
+  const [coinDetails, setCoinDetails] = useState([]);
+
+  useEffect(() => {
+    axios({
+      url: 'https://proxy.junocollege.com/https://api.coingecko.com/api/v3/coins/markets',
+      params: {
+        ids: 'bitcoin, ethereum, tether, binancecoin, usd-coin, ripple, cardano, staked-ether, dogecoin, matic-network',
+        vs_currency: 'cad'
+      }
+    }).then((apiData) => {
+      // console.log(apiData.data);
+      setCoinDetails(apiData.data);
+    })
+  }, [coinDetails])
+
 // create a state item to store data coming from the Coin Gecko API 
 
 // create a state item to store different currencies and their flags, that can be changed by the user (via a small dropdown selection) **
@@ -18,9 +35,13 @@ function App() {
     <div className="App">
       <div className="wrapper">
         <Header />
-        <CoinButton />
+        <div className="button-div">
+          {coinDetails.map((coin) => {
+            return <CoinButton logo={coin.image}/>
+          })}          
+        </div>
         <Results />
-        <BuyButton />
+        
       </div>
     
       <Footer />

@@ -10,7 +10,7 @@ img {max-width: 100%; display: block;}
 
 /* WRAPPER */
 .wrapper {
-  max-width: 1200px;
+  max-width: 1300px;
   width: 95%;
   margin: 0 auto;
 }
@@ -42,10 +42,18 @@ h1, p {
 /* RESULTS */
 .results {
   background-color: #0B1043;
-  height: 65vh;
+  height: 70vh;
   padding: 20px;
 }
 
+.button-div {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.crypto-button {
+  margin-right: 5px;
+}
 .title, .data {
   background-color: #900F0F;
   padding: 10px;

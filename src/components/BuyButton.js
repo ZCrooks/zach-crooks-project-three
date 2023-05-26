@@ -1,6 +1,6 @@
 const BuyButton = () => {
     return (
-        <a></a>
+        <button>BUY NOW</button>
     )
 }
 
