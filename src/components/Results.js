@@ -1,6 +1,4 @@
-
 const Results = (props) => {
-
     return (
         <div className="results">
             <div className="vital-info">
@@ -9,13 +7,14 @@ const Results = (props) => {
             </div>
             <div className="data">
                 <div className="stats">
-                    <h3>Price Statistics</h3>
-                    {/* 24h Low / 24h High  */}
-                    {/* 7d Low / 7d High */}
-                    {/* Total Volume */}
-                    {/* Market Cap Rank */}
-                    {/* Market Cap  */}
-                    {/* Total Supply*/}
+                    <h3 className="stats-text">Coin Statistics</h3>
+                    <p>24h Low / 24h High: {props.lowHigh} </p>
+                    <p>All Time High: {props.allTimeHigh}</p>
+                    <p>All Time Low: {props.allTimeLow}</p>
+                    <p>Trading Volume: {props.volume} </p>
+                    <p>Market Cap: {props.marketCap} </p>
+                    <p>Market Cap Rank: {props.marketCapRank}</p>
+                    <p>Total Supply: {props.supply}</p>
                 </div>
                 <div className="chart">
 
