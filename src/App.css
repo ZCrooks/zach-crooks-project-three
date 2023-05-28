@@ -65,6 +65,11 @@ h1, p {
   text-align: center;
 }
 
+.vital-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .data {
   height: 50vh;
 }

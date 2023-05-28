@@ -1,10 +1,11 @@
+
 const Results = (props) => {
 
     return (
         <div className="results">
             <div className="vital-info">
-                <h2 className="title">{props.currencyName}</h2>
-                <p className="price"></p> 
+                <h2 className="title">{props.name}</h2>
+                <p className="price">{props.price}</p> 
             </div>
             <div className="data">
                 <div className="stats">

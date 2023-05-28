@@ -10,13 +10,14 @@ import Footer from './components/Footer';
 function App() {
   // Set State Items
   const [coinData, setCoinData] = useState([]);
-  const [selectedCoin, setSelectedCoin] = useState([]); 
+  const [selectedCoin, setSelectedCoin] = useState([]);
+  const [selectedCoinPrice, setSelectedCoinPrice] = useState('$') 
   const [selectedCurrency, setSelectedCurrency] = useState('cad');
   const [changeCurrency, setChangeCurrency] = useState([]);
-
+  // https://proxy.junocollege.com/
   useEffect(() => {
     axios({
-      url: 'https://proxy.junocollege.com/https://api.coingecko.com/api/v3/coins/markets',
+      url: 'https://api.coingecko.com/api/v3/coins/markets',
       params: {
         ids: 'bitcoin, ethereum, tether, binancecoin, usd-coin, ripple, cardano, staked-ether, dogecoin, matic-network',
         vs_currency: 'cad'
@@ -26,22 +27,19 @@ function App() {
     })
   }, [])
 
-  
 // Method to re-render data to only display selected coin statistics 
 const handleClick = (event) => {
   // Find the name of the coin that the user clicks on
   const coin = event.target.className;
-  // Using that name, look into coin data for an object with the same name 
-  const data = coinData.map((coinName) => coinName.name);
-  const newData = data.filter((filteredCoin) => filteredCoin == coin);
-  // Set a new Piece of state, and that piece of state will be set to that object 
-  setSelectedCoin(newData);
-
-  // Render that object on the page ()
+  // Using that name, look into coin data for an object property with the same name 
+  const data = coinData.filter((filteredCoin) => filteredCoin.name === coin)
   
+  // Set new pieces of state for each statistic needed
+  setSelectedCoin(data[0].name);
+  setSelectedCoinPrice(data[0].current_price);
+  // Render that object on the page
 }
 
-// create a state item to store different currencies and their flags, that can be changed by the user (via a small dropdown selection) **
 
   return (
     <div className="App">
@@ -54,10 +52,14 @@ const handleClick = (event) => {
               key={coin.symbol} 
               logo={coin.image} 
               handleClick={handleClick}
-              currencyName={coin.name}/>)
+              currencyName={coin.name}
+              price={coin.current_price}
+              />)
           })}          
         </div>
-        <Results currencyName={selectedCoin} />
+        <Results 
+          name={selectedCoin}
+          price={`$${selectedCoinPrice.toLocaleString()}`}/>
       </div> {/* WRAPPER ENDS */}
     
       <Footer />
