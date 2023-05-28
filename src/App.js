@@ -8,7 +8,11 @@ import BuyButton from './components/BuyButton';
 import Footer from './components/Footer';
 
 function App() {
-  const [coinDetails, setCoinDetails] = useState([]);
+  // Set State Items
+  const [coinData, setCoinData] = useState([]);
+  const [selectedCoin, setSelectedCoin] = useState([]); 
+  const [selectedCurrency, setSelectedCurrency] = useState('cad');
+  const [changeCurrency, setChangeCurrency] = useState([]);
 
   useEffect(() => {
     axios({
@@ -18,31 +22,43 @@ function App() {
         vs_currency: 'cad'
       }
     }).then((apiData) => {
-      // console.log(apiData.data);
-      setCoinDetails(apiData.data);
+      setCoinData(apiData.data);
     })
-  }, [coinDetails])
+  }, [])
 
-// create a state item to store data coming from the Coin Gecko API 
+  
+// Method to re-render data to only display selected coin statistics 
+const handleClick = (event) => {
+  // Find the name of the coin that the user clicks on
+  const coin = event.target.className;
+  // Using that name, look into coin data for an object with the same name 
+  const data = coinData.map((coinName) => coinName.name);
+  const newData = data.filter((filteredCoin) => filteredCoin == coin);
+  // Set a new Piece of state, and that piece of state will be set to that object 
+  setSelectedCoin(newData);
+
+  // Render that object on the page ()
+  
+}
 
 // create a state item to store different currencies and their flags, that can be changed by the user (via a small dropdown selection) **
-// create a method (getCoinData) to make a third-party API call to get all data needed / return an unsuccessful message in case of any errors 
-// create a method (handleClick) to re-render data to only display coin price, chart, trading volume, etc. for that particular, selected coin (upon clicking the appropriate coin button)
-// do this by using .map() to sort through that data and return the metrics needed to be displayed in the Results div (which takes up most of the page)
-
 
   return (
     <div className="App">
       <div className="wrapper">
         <Header />
         <div className="button-div">
-          {coinDetails.map((coin) => {
-            return <CoinButton logo={coin.image}/>
+          {coinData.map((coin) => {
+            return (
+              <CoinButton 
+              key={coin.symbol} 
+              logo={coin.image} 
+              handleClick={handleClick}
+              currencyName={coin.name}/>)
           })}          
         </div>
-        <Results />
-        
-      </div>
+        <Results currencyName={selectedCoin} />
+      </div> {/* WRAPPER ENDS */}
     
       <Footer />
     </div>
@@ -50,3 +66,12 @@ function App() {
 }
 
 export default App;
+        {/* {coinData.map((coin) => {
+          return (
+            <Results 
+            name={coin.name}
+            key={coin.symbol}
+            
+            />
+          )
+        })} */}

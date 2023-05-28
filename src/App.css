@@ -51,9 +51,10 @@ h1, p {
   margin-bottom: 20px;
 }
 
-.crypto-button {
+#crypto-button {
   margin-right: 5px;
 }
+
 .title, .data {
   background-color: #900F0F;
   padding: 10px;
