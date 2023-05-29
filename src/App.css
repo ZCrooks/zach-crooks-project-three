@@ -36,11 +36,20 @@ h1, h3, p {
 
 .price {
   font-size: 1.5rem;
+  margin-right: 20px;
 }
 
 .title,
 .footer-text {
   color: #FFD705;
+}
+
+.title {
+  background-color: #900F0F;
+}
+
+.data {
+  background-color: black;
 }
 
 /* HEADER */
@@ -66,13 +75,18 @@ header {
 }
 
 .title, .data {
-  background-color: #900F0F;
   padding: 10px;
 } 
+
+.price-currency-div {
+  display: flex;
+  align-items: center;
+}
 
 .stats {
   margin: 20px;
 }
+
 .title {
   width: 25%;
   text-align: center;
@@ -87,15 +101,23 @@ h3 {
   align-items: center;
   justify-content: space-between;
 }
+
 .data {
   height: 50vh;
+  display: flex;
+  align-items: center;
+}
+
+.chart {
+  height: 45vh;
+  width: 75%;
+  background-color: #202124;
 }
 
 /* FOOTER */
 footer {
   position: absolute;
   text-align: center;
-  bottom: 0;
   width: 100%;
   background-color: #900F0F;
 }

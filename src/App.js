@@ -10,12 +10,13 @@ import Footer from './components/Footer';
 function App() {
   // SET STATE ITEMS
 
-  // Data
+  // Data and Ticker
   const [coinData, setCoinData] = useState([]);
+  // const [coinTicker, setCoinTicker] = useState([]);
 
-  // Statistics
+  // Statistics - Data
   const [selectedCoinName, setSelectedCoinName] = useState([]);
-  const [selectedCoinPrice, setSelectedCoinPrice] = useState('');
+  const [selectedCoinPrice, setSelectedCoinPrice] = useState(''); 
   const [selectedCoinDayHigh, setSelectedCoinDayHigh] = useState('');
   const [selectedCoinDayLow, setSelectedCoinDayLow] = useState('');
   const [selectedCoinATH, setSelectedCoinATH] = useState('');
@@ -26,22 +27,34 @@ function App() {
   const [selectedCoinSupply, setSelectedCoinSupply] = useState('');
 
   // Currency Changer
-  const [selectedCurrency, setSelectedCurrency] = useState('cad');
-  const [changeCurrency, setChangeCurrency] = useState([]);
+  const [selectedCurrency, setSelectedCurrency] = useState('usd');
+
   // https://proxy.junocollege.com/
+
+  // GRAB BASIC COIN DATA
   useEffect(() => {
     axios({
-      url: 'https://proxy.junocollege.com/https://api.coingecko.com/api/v3/coins/markets',
+      url: 'https://api.coingecko.com/api/v3/coins/markets',
       params: {
         ids: 'bitcoin, ethereum, tether, binancecoin, usd-coin, ripple, cardano, staked-ether, dogecoin, matic-network',
-        vs_currency: 'cad'
+        vs_currency: selectedCurrency
       }
     }).then((apiData) => {
       setCoinData(apiData.data);
-    })
-  }, [])
+      // Ensure prices and statistics are being updated based on selected Currency
+      const selectedCoin = apiData.data.find((coin) => coin.name === selectedCoinName);
+      // Update the selected coin's price if selectedCoin is defined
+      if (selectedCoin) {
+        setSelectedCoinPrice(selectedCoin.current_price);
+        setSelectedCoinATH(selectedCoin.ath);
+        setSelectedCoinATL(selectedCoin.atl);
+        setSelectedCoinDayLow(selectedCoin.low_24h);
+        setSelectedCoinDayHigh(selectedCoin.high_24h);
+      }
+    });
+  }, [selectedCurrency, selectedCoinName])
 
-// Method to re-render data to only display selected coin statistics 
+// METHOD TO RE-RENDER DATA TO ONLY DISPLAY SELECTED COIN STATISTICS
 const handleClick = (event) => {
   // Find the name of the coin that the user clicks on
   const coin = event.target.className;
@@ -61,10 +74,11 @@ const handleClick = (event) => {
     setSelectedCoinSupply('N/A');
   } else {
     setSelectedCoinSupply(data[0].total_supply);
-  }
+  } // Error handling ends
   setSelectedCoinDayLow(data[0].low_24h);
   setSelectedCoinDayHigh(data[0].high_24h);
 }
+
   return (
     <div className="App">
       <div className="wrapper">
@@ -87,7 +101,7 @@ const handleClick = (event) => {
               marketCapRank={coin.market_cap_rank}
               supply={coin.total_supply}
               />)
-          })}          
+          })}         
         </div>
         <Results 
           name={selectedCoinName.toString().toUpperCase()}
@@ -99,6 +113,8 @@ const handleClick = (event) => {
           marketCap={selectedCoinMarketCap.toLocaleString()}
           marketCapRank={selectedCoinMarketCapRank.toLocaleString()}
           supply={selectedCoinSupply.toLocaleString()}
+          selectedCurrency={selectedCurrency}
+          setSelectedCurrency={setSelectedCurrency}
           />
       </div> {/* WRAPPER ENDS */}
     
@@ -108,3 +124,22 @@ const handleClick = (event) => {
 }
 
 export default App;
+
+// // Grab Coin Tickers 
+//   const cryptoIds = ['bitcoin', 'ethereum', 'tether', 'binancecoin', 'usd-coin', 'ripple', 'cardano', 'staked-ether', 'dogecoin', 'matic-network'];
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const cryptoDataArray = [];
+//       for (let id of cryptoIds) {
+//         try {
+//           const response = await axios.get(`https://proxy.junocollege.com/https://api.coingecko.com/api/v3/coins/${id}`);
+//           cryptoDataArray.push(response.data);
+//         } catch (error) {
+//           console.error(`Error fetching data for ${id}:`, error);
+//         }
+//       }
+//       setCoinTicker(cryptoDataArray);
+//     };
+//     fetchData();
+//   }, []);
