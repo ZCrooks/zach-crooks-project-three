@@ -22,6 +22,8 @@ const Results = (props) => {
             <div className="data">
                 <div className="stats">
                     <h3 className="stats-text">Coin Statistics</h3>
+                    <p>24h Price Change: {props.priceChange} </p>
+                    <p>24h Price Change (percentage): {props.priceChangePercent}</p>
                     <p>24h Low / 24h High: {props.lowHigh} </p>
                     <p>All Time High: {props.allTimeHigh}</p>
                     <p>All Time Low: {props.allTimeLow}</p>

@@ -17,6 +17,8 @@ function App() {
   const [selectedCoinPrice, setSelectedCoinPrice] = useState(''); 
   const [selectedCoinDayHigh, setSelectedCoinDayHigh] = useState('');
   const [selectedCoinDayLow, setSelectedCoinDayLow] = useState('');
+  const [selectedCoinPriceChange, setSelectedCoinPriceChange] = useState('');
+  const [selectedCoinPriceChangePercent, setSelectedCoinPriceChangePercent] = useState('');
   const [selectedCoinATH, setSelectedCoinATH] = useState('');
   const [selectedCoinATL, setSelectedCoinATL] = useState('');
   const [selectedCoinVolume, setSelectedCoinVolume] = useState('');
@@ -42,6 +44,7 @@ function App() {
       // Update the selected coin's price if selectedCoin is defined
       if (selectedCoin) {
         setSelectedCoinPrice(selectedCoin.current_price);
+        setSelectedCoinPriceChange(selectedCoin.price_change_24h);
         setSelectedCoinATH(selectedCoin.ath);
         setSelectedCoinATL(selectedCoin.atl);
         setSelectedCoinDayLow(selectedCoin.low_24h);
@@ -62,6 +65,8 @@ const handleClick = (event) => {
   setSelectedCoinName(data[0].name);
   setSelectedCoinImage(data[0].image);
   setSelectedCoinPrice(data[0].current_price);
+  setSelectedCoinPriceChange(data[0].price_change_24h);
+  setSelectedCoinPriceChangePercent(data[0].price_change_percentage_24h);
   setSelectedCoinATH(data[0].ath);
   setSelectedCoinATL(data[0].atl);
   setSelectedCoinVolume(data[0].total_volume);
@@ -94,7 +99,6 @@ const currencySymbol = (selectedCurrency) => {
   return symbol;
 }
 
-
 // JSX
   return (
     <div className="App">
@@ -109,6 +113,8 @@ const currencySymbol = (selectedCurrency) => {
               handleClick={handleClick}
               currencyName={coin.name}
               price={coin.current_price}
+              priceChange={coin.price_change_24h}
+              priceChangePercent={coin.price_change_percentage_24h}
               dayLow={coin.low_24h}
               dayHigh={coin.high_24h}
               allTimeHigh={coin.ath}
@@ -124,6 +130,8 @@ const currencySymbol = (selectedCurrency) => {
         <Results 
           name={selectedCoinName.toString().toUpperCase()}
           price={`${currencySymbol(selectedCurrency)}${selectedCoinPrice.toLocaleString()}`}
+          priceChange={`${currencySymbol(selectedCurrency)}${selectedCoinPriceChange.toLocaleString()}`}
+          priceChangePercent={`${selectedCoinPriceChangePercent.toLocaleString()}${'%'}`}
           lowHigh={`${currencySymbol(selectedCurrency)}${selectedCoinDayLow.toLocaleString()} / ${currencySymbol(selectedCurrency)}${selectedCoinDayHigh.toLocaleString()}`}
           allTimeHigh={`${currencySymbol(selectedCurrency)}${selectedCoinATH.toLocaleString()}`}
           allTimeLow={`${currencySymbol(selectedCurrency)}${selectedCoinATL.toLocaleString()}`}
@@ -135,6 +143,7 @@ const currencySymbol = (selectedCurrency) => {
           setSelectedCurrency={setSelectedCurrency}
           image={selectedCoinImage}
           />
+          {/* <BuyButton /> */}
       </div> {/* WRAPPER ENDS */}
       <Footer />
     </div>
