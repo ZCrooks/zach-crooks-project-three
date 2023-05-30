@@ -1,10 +1,8 @@
 const Results = (props) => {
-
     const changeCurrency = (event) => {
         console.log(event.target.value)
         props.setSelectedCurrency(event.target.value);
     };
-
     return (
         <div className="results">
             <div className="vital-info">
@@ -32,12 +30,16 @@ const Results = (props) => {
                     <p>Market Cap Rank: {props.marketCapRank}</p>
                     <p>Total Supply: {props.supply}</p>
                 </div>
-                <div className="chart">
-                   
+                <div className="img-container">
+                    {props.image ? (
+                        <img src={props.image} className="main-image" alt="cryptocurrency image" />                        
+                    ) : (
+                        <div className="default-text">PLEASE SELECT A CRYPTOCURRENCY</div>
+                    )}
+
                 </div>
             </div>      
         </div>
     )
 }
-
 export default Results;

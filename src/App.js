@@ -16,6 +16,7 @@ function App() {
 
   // Statistics - Data
   const [selectedCoinName, setSelectedCoinName] = useState([]);
+  const [selectedCoinImage, setSelectedCoinImage] = useState('');
   const [selectedCoinPrice, setSelectedCoinPrice] = useState(''); 
   const [selectedCoinDayHigh, setSelectedCoinDayHigh] = useState('');
   const [selectedCoinDayLow, setSelectedCoinDayLow] = useState('');
@@ -29,6 +30,7 @@ function App() {
   // Currency Changer
   const [selectedCurrency, setSelectedCurrency] = useState('usd');
 
+ 
   // https://proxy.junocollege.com/
 
   // GRAB BASIC COIN DATA
@@ -54,6 +56,7 @@ function App() {
     });
   }, [selectedCurrency, selectedCoinName])
 
+
 // METHOD TO RE-RENDER DATA TO ONLY DISPLAY SELECTED COIN STATISTICS
 const handleClick = (event) => {
   // Find the name of the coin that the user clicks on
@@ -63,6 +66,7 @@ const handleClick = (event) => {
   
   // Set new pieces of state for each statistic needed
   setSelectedCoinName(data[0].name);
+  setSelectedCoinImage(data[0].image);
   setSelectedCoinPrice(data[0].current_price);
   setSelectedCoinATH(data[0].ath);
   setSelectedCoinATL(data[0].atl);
@@ -100,6 +104,7 @@ const handleClick = (event) => {
               marketCap={coin.market_cap}
               marketCapRank={coin.market_cap_rank}
               supply={coin.total_supply}
+              image={coin.image}
               />)
           })}         
         </div>
@@ -115,6 +120,7 @@ const handleClick = (event) => {
           supply={selectedCoinSupply.toLocaleString()}
           selectedCurrency={selectedCurrency}
           setSelectedCurrency={setSelectedCurrency}
+          image={selectedCoinImage}
           />
       </div> {/* WRAPPER ENDS */}
     
@@ -124,22 +130,3 @@ const handleClick = (event) => {
 }
 
 export default App;
-
-// // Grab Coin Tickers 
-//   const cryptoIds = ['bitcoin', 'ethereum', 'tether', 'binancecoin', 'usd-coin', 'ripple', 'cardano', 'staked-ether', 'dogecoin', 'matic-network'];
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const cryptoDataArray = [];
-//       for (let id of cryptoIds) {
-//         try {
-//           const response = await axios.get(`https://proxy.junocollege.com/https://api.coingecko.com/api/v3/coins/${id}`);
-//           cryptoDataArray.push(response.data);
-//         } catch (error) {
-//           console.error(`Error fetching data for ${id}:`, error);
-//         }
-//       }
-//       setCoinTicker(cryptoDataArray);
-//     };
-//     fetchData();
-//   }, []);

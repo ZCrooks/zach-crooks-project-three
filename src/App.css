@@ -30,12 +30,13 @@ h2 {
   font-weight: 400;
 }
 
-h1, h3, p {
+h1, h3, p, .default-text {
   color: white;
 }
 
 .price {
   font-size: 1.5rem;
+  font-weight: 600;
   margin-right: 20px;
 }
 
@@ -63,6 +64,7 @@ header {
   background-color: #0B1043;
   height: 70vh;
   padding: 20px;
+  padding-top: 10px;
 }
 
 .button-div {
@@ -85,6 +87,7 @@ header {
 
 .stats {
   margin: 20px;
+  width: 50%;
 }
 
 .title {
@@ -93,7 +96,7 @@ header {
 }
 
 h3 {
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .vital-info {
@@ -103,15 +106,18 @@ h3 {
 }
 
 .data {
-  height: 50vh;
+  height: 55vh;
   display: flex;
   align-items: center;
 }
 
-.chart {
+.img-container {
   height: 45vh;
-  width: 75%;
+  width: 50%;
+  margin-right: 20px;
   background-color: #202124;
+  display: grid;
+  place-items: center;
 }
 
 /* FOOTER */
@@ -120,6 +126,7 @@ footer {
   text-align: center;
   width: 100%;
   background-color: #900F0F;
+  margin-top: 10px;
 }
 
 
