@@ -8,13 +8,10 @@ import BuyButton from './components/BuyButton';
 import Footer from './components/Footer';
 
 function App() {
-  // SET STATE ITEMS
-
-  // Data and Ticker
+  // COINGECKO API DATA STATE
   const [coinData, setCoinData] = useState([]);
-  // const [coinTicker, setCoinTicker] = useState([]);
 
-  // Statistics - Data
+  // COIN STATISTICS STATE
   const [selectedCoinName, setSelectedCoinName] = useState([]);
   const [selectedCoinImage, setSelectedCoinImage] = useState('');
   const [selectedCoinPrice, setSelectedCoinPrice] = useState(''); 
@@ -27,13 +24,10 @@ function App() {
   const [selectedCoinMarketCapRank, setSelectedCoinMarketCapRank] = useState('');
   const [selectedCoinSupply, setSelectedCoinSupply] = useState('');
 
-  // Currency Changer
+  // CURRENCY CHANGER STATE
   const [selectedCurrency, setSelectedCurrency] = useState('usd');
 
- 
-  // https://proxy.junocollege.com/
-
-  // GRAB BASIC COIN DATA
+  // GRAB BASIC COIN DATA VIA USEEFFECT
   useEffect(() => {
     axios({
       url: 'https://api.coingecko.com/api/v3/coins/markets',
@@ -83,6 +77,25 @@ const handleClick = (event) => {
   setSelectedCoinDayHigh(data[0].high_24h);
 }
 
+// METHOD TO DISPLAY CORRECT CURRENCY SYMBOL
+const currencySymbol = (selectedCurrency) => {
+  let symbol;
+  if (selectedCurrency === 'usd' || selectedCurrency === 'cad') {
+    symbol = '$';
+  } else if (selectedCurrency === 'gbp') {
+    symbol = '£';
+  } else if (selectedCurrency === 'eur') {
+    symbol = '€';
+  } else if (selectedCurrency === 'jpy') {
+    symbol = '¥';
+  } else {
+    symbol = '';
+  }
+  return symbol;
+}
+
+
+// JSX
   return (
     <div className="App">
       <div className="wrapper">
@@ -110,10 +123,10 @@ const handleClick = (event) => {
         </div>
         <Results 
           name={selectedCoinName.toString().toUpperCase()}
-          price={`$${selectedCoinPrice.toLocaleString()}`}
-          lowHigh={`$${selectedCoinDayLow} / $${selectedCoinDayHigh}`}
-          allTimeHigh={`$${selectedCoinATH.toLocaleString()}`}
-          allTimeLow={`$${selectedCoinATL.toLocaleString()}`}
+          price={`${currencySymbol(selectedCurrency)}${selectedCoinPrice.toLocaleString()}`}
+          lowHigh={`${currencySymbol(selectedCurrency)}${selectedCoinDayLow.toLocaleString()} / ${currencySymbol(selectedCurrency)}${selectedCoinDayHigh.toLocaleString()}`}
+          allTimeHigh={`${currencySymbol(selectedCurrency)}${selectedCoinATH.toLocaleString()}`}
+          allTimeLow={`${currencySymbol(selectedCurrency)}${selectedCoinATL.toLocaleString()}`}
           volume={selectedCoinVolume.toLocaleString()}
           marketCap={selectedCoinMarketCap.toLocaleString()}
           marketCapRank={selectedCoinMarketCapRank.toLocaleString()}
@@ -123,7 +136,6 @@ const handleClick = (event) => {
           image={selectedCoinImage}
           />
       </div> {/* WRAPPER ENDS */}
-    
       <Footer />
     </div>
   );

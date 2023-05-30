@@ -1,6 +1,6 @@
 const Results = (props) => {
+    // GRAB USER INTL CURRENCY DROPDOWN SELECTION
     const changeCurrency = (event) => {
-        console.log(event.target.value)
         props.setSelectedCurrency(event.target.value);
     };
     return (
@@ -36,7 +36,6 @@ const Results = (props) => {
                     ) : (
                         <div className="default-text">PLEASE SELECT A CRYPTOCURRENCY</div>
                     )}
-
                 </div>
             </div>      
         </div>
