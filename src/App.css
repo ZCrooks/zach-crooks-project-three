@@ -64,7 +64,7 @@ header {
 /* RESULTS */
 .results {
   background-color: #0B1043;
-  height: 95vh;
+  height: 90vh;
   padding: 20px;
   padding-top: 10px;
   margin-bottom: 30px;
@@ -78,7 +78,6 @@ header {
 #crypto-button {
   margin-right: 5px;
 }
-
 
 .price-currency-div {
   display: flex;
@@ -94,8 +93,9 @@ header {
 
 .title {
   width: 25%;
+  border-radius: 5px;
   text-align: center;
-  padding: 10px;
+  margin-bottom: 20px;
 }
 
 h3 {
@@ -113,6 +113,7 @@ h3 {
   display: flex;
   align-items: center;
   padding: 20px;
+  border-radius: 5px;
 }
 
 .img-container {

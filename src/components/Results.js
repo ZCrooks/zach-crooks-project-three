@@ -6,7 +6,10 @@ const Results = (props) => {
     return (
         <div className="results">
             <div className="vital-info">
-                <h2 className="title">{props.name}</h2>
+                <div className="title">
+                    <h2>{props.name}</h2>
+                </div>
+                
                 <div className="price-currency-div">
                     <p className="price">Price: {props.price}</p> 
                     {/* Currency Changer */}
