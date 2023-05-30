@@ -143,7 +143,7 @@ const currencySymbol = (selectedCurrency) => {
           setSelectedCurrency={setSelectedCurrency}
           image={selectedCoinImage}
           />
-          {/* <BuyButton /> */}
+          <BuyButton />
       </div> {/* WRAPPER ENDS */}
       <Footer />
     </div>
