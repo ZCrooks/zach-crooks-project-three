@@ -160,4 +160,25 @@ footer {
 }
 
 
-/* RESULTS FORMATTING */
+/* MEDIA QUERIES */
+
+@media (max-width: 800px) {
+  .button-div {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #crypto-button {
+    max-width: 100px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 560px) {
+  header {
+    flex-direction: column;
+  }
+  h1 {
+    margin-bottom: auto;
+  }
+}
