@@ -34,6 +34,14 @@ h1, h3, p, .default-text {
   color: white;
 }
 
+.default-text{
+  white-space: nowrap;
+}
+
+.stats-header{
+  font-size: 2rem;
+} 
+
 .price {
   font-size: 1.5rem;
   font-weight: 600;
@@ -159,9 +167,7 @@ footer {
   margin-top: 30px;
 }
 
-
 /* MEDIA QUERIES */
-
 @media (max-width: 800px) {
   .button-div {
     display: inline-flex;
@@ -172,13 +178,64 @@ footer {
     max-width: 100px;
     margin: 5px;
   }
+  .default-text {
+    font-size: 0.8rem;
+  }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 750px) {
+  .data {
+    justify-content: start;
+  }
+  .default-text{
+    font-size: 0.6rem;
+  }
+  .stats-header {
+    font-size: 1.3rem;
+  }
+  .stats-text {
+    font-size: 0.8rem;
+  }
+  .img-container {
+    padding: 20px;
+  }
+
+}
+
+@media (max-width: 600px) {
   header {
     flex-direction: column;
+  }
+  .data {
+    flex-direction: column-reverse;
   }
   h1 {
     margin-bottom: auto;
   }
+  .stats {
+    padding-top: 0;
+    width: 75%;
+  }
+  .stats-text {
+    font-size: 0.7rem;
+  }
+  .stats-header {
+    font-size: 1.2rem;
+  }
+  .vital-info {
+    flex-direction: column;
+  }
+  .title { 
+    width: 100%;
+  }
+  .img-container {
+    width: 25%;
+  }
 }
+
+@media (max-width: 350px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+

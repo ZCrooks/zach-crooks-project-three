@@ -24,16 +24,16 @@ const Results = (props) => {
             </div>
             <div className="data">
                 <div className="stats">
-                    <h3 className="stats-text">Coin Statistics</h3>
-                    <p>24h Price Change: {props.priceChange} </p>
-                    <p>24h Price Change (percentage): {props.priceChangePercent}</p>
-                    <p>24h Low / 24h High: {props.lowHigh} </p>
-                    <p>All Time High: {props.allTimeHigh}</p>
-                    <p>All Time Low: {props.allTimeLow}</p>
-                    <p>Trading Volume: {props.volume} </p>
-                    <p>Market Cap: {props.marketCap} </p>
-                    <p>Market Cap Rank: {props.marketCapRank}</p>
-                    <p>Total Supply: {props.supply}</p>
+                    <h3 className="stats-header">Coin Statistics</h3>
+                    <p className="stats-text">24h Price Change: {props.priceChange} </p>
+                    <p className="stats-text">24h Price Change (percentage): {props.priceChangePercent}</p>
+                    <p className="stats-text">24h Low / 24h High: {props.lowHigh} </p>
+                    <p className="stats-text">All Time High: {props.allTimeHigh}</p>
+                    <p className="stats-text">All Time Low: {props.allTimeLow}</p>
+                    <p className="stats-text">Trading Volume: {props.volume} </p>
+                    <p className="stats-text">Market Cap: {props.marketCap} </p>
+                    <p className="stats-text">Market Cap Rank: {props.marketCapRank}</p>
+                    <p className="stats-text">Total Supply: {props.supply}</p>
                 </div>
                 <div className="img-container">
                     {props.image ? (
