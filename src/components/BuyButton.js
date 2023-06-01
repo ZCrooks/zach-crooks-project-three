@@ -1,6 +1,6 @@
 const BuyButton = () => {
     return (
-        <a href="https://www.coinbase.com/" target="_blank" className="buy-sell-button">BUY / SELL</a>
+        <a href="https://www.coinbase.com/" target="_blank" rel="noreferrer" className="buy-sell-button">BUY / SELL</a>
     )
 }
 
