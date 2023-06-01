@@ -37,7 +37,7 @@ const Results = (props) => {
                 </div>
                 <div className="img-container">
                     {props.image ? (
-                        <img src={props.image} className="main-image" alt="cryptocurrency image" />                        
+                        <img src={props.image} className="main-image" alt="cryptocurrency logo small" />                        
                     ) : (
                         <div className="default-text">PLEASE SELECT A CRYPTOCURRENCY</div>
                     )}
