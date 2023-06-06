@@ -54,7 +54,7 @@ function App() {
   }, [selectedCurrency, selectedCoinName])
 
 
-// METHOD TO RE-RENDER DATA TO ONLY DISPLAY SELECTED COIN STATISTICS
+// METHOD TO RE-RENDER DATA TO ONLY DISPLAY SELECTED COIN STATISTICS ONCE APPROPRIATE BUTTON IS CLICKED
 const handleClick = (event) => {
   // Find the name of the coin that the user clicks on
   const coin = event.target.className;

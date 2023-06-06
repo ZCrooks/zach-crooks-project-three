@@ -14,11 +14,11 @@ const Results = (props) => {
                     <p className="price">Price: {props.price}</p> 
                     {/* Currency Changer */}
                     <select id="currency" value={props.selectedCurrency} onChange={changeCurrency} >
-                        <option value="usd">&#127482;&#127480;</option>
-                        <option value="cad">&#127464;&#127462;</option>
-                        <option value="eur">&#127466;&#127482;</option>
-                        <option value="gbp">&#127468;&#127463;</option>
-                        <option value="jpy">&#127471;&#127477;</option>
+                        <option value="usd">&#127482;&#127480; USD</option>
+                        <option value="cad">&#127464;&#127462; CAD</option>
+                        <option value="eur">&#127466;&#127482; EUR</option>
+                        <option value="gbp">&#127468;&#127463; GBP</option>
+                        <option value="jpy">&#127471;&#127477; JPY</option>
                     </select>                    
                 </div>
             </div>
