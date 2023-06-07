@@ -1,3 +1,4 @@
+// HEADER COMPONENT
 const Header = () => {
     return (
         <header>

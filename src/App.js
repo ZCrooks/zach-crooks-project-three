@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, } from 'react';
 import axios from "axios";
 import Header from './components/Header';
 import CoinButton from './components/CoinButton';
@@ -8,25 +8,28 @@ import BuyButton from './components/BuyButton';
 import Footer from './components/Footer';
 
 function App() {
-  // COINGECKO API DATA STATE
+
+  // SET COINGECKO API DATA STATE
   const [coinData, setCoinData] = useState([]);
 
-  // COIN STATISTICS STATE
-  const [selectedCoinName, setSelectedCoinName] = useState([]);
-  const [selectedCoinImage, setSelectedCoinImage] = useState('');
-  const [selectedCoinPrice, setSelectedCoinPrice] = useState(''); 
-  const [selectedCoinDayHigh, setSelectedCoinDayHigh] = useState('');
-  const [selectedCoinDayLow, setSelectedCoinDayLow] = useState('');
-  const [selectedCoinPriceChange, setSelectedCoinPriceChange] = useState('');
-  const [selectedCoinPriceChangePercent, setSelectedCoinPriceChangePercent] = useState('');
-  const [selectedCoinATH, setSelectedCoinATH] = useState('');
-  const [selectedCoinATL, setSelectedCoinATL] = useState('');
-  const [selectedCoinVolume, setSelectedCoinVolume] = useState('');
-  const [selectedCoinMarketCap, setSelectedCoinMarketCap] = useState('');
-  const [selectedCoinMarketCapRank, setSelectedCoinMarketCapRank] = useState('');
-  const [selectedCoinSupply, setSelectedCoinSupply] = useState('');
+  // SET STATE FOR COIN NAMES AND STATISTICS
+  const [selectedCoin, setSelectedCoin] = useState({
+    name: '',
+    image: '',
+    price: '',
+    dayHigh: '',
+    dayLow: '',
+    priceChange: '',
+    priceChangePercent: '',
+    ath: '',
+    atl: '',
+    volume: '',
+    marketCap: '',
+    marketCapRank: '',
+    supply: ''
+  });
 
-  // CURRENCY CHANGER STATE
+  // SET CURRENCY CHANGER STATE
   const [selectedCurrency, setSelectedCurrency] = useState('usd');
 
   // GRAB BASIC COIN DATA VIA USEEFFECT
@@ -40,18 +43,25 @@ function App() {
     }).then((apiData) => {
       setCoinData(apiData.data);
       // Ensure prices and statistics are being updated based on selected Currency
-      const selectedCoin = apiData.data.find((coin) => coin.name === selectedCoinName);
+      const coin = apiData.data.find((coin) => coin.name === selectedCoin.name); 
       // Update the selected coin's price if selectedCoin is defined
-      if (selectedCoin) {
-        setSelectedCoinPrice(selectedCoin.current_price);
-        setSelectedCoinPriceChange(selectedCoin.price_change_24h);
-        setSelectedCoinATH(selectedCoin.ath);
-        setSelectedCoinATL(selectedCoin.atl);
-        setSelectedCoinDayLow(selectedCoin.low_24h);
-        setSelectedCoinDayHigh(selectedCoin.high_24h);
+      if (coin) {
+        setSelectedCoin(prevState => ({
+          ...prevState,
+          price: coin.current_price,
+          priceChange: coin.price_change_24h,
+          ath: coin.ath,
+          atl: coin.atl,
+          dayLow: coin.low_24h,
+          dayHigh: coin.high_24h
+        }));
       }
+    })
+    .catch((error) => {
+      console.error("Error fetching coin data:", error);
+      alert("Data is not available right now. Please try again in a few minutes!")
     });
-  }, [selectedCurrency, selectedCoinName])
+  }, [selectedCurrency, selectedCoin.name]);
 
 
 // METHOD TO RE-RENDER DATA TO ONLY DISPLAY SELECTED COIN STATISTICS ONCE APPROPRIATE BUTTON IS CLICKED
@@ -59,27 +69,24 @@ const handleClick = (event) => {
   // Find the name of the coin that the user clicks on
   const coin = event.target.className;
   // Using that name, look into coin data for an object property with the same name 
-  const data = coinData.filter((filteredCoin) => filteredCoin.name === coin)
+  const data = coinData.find((filteredCoin) => filteredCoin.name === coin)
   
   // Set new pieces of state for each statistic needed
-  setSelectedCoinName(data[0].name);
-  setSelectedCoinImage(data[0].image);
-  setSelectedCoinPrice(data[0].current_price);
-  setSelectedCoinPriceChange(data[0].price_change_24h);
-  setSelectedCoinPriceChangePercent(data[0].price_change_percentage_24h);
-  setSelectedCoinATH(data[0].ath);
-  setSelectedCoinATL(data[0].atl);
-  setSelectedCoinVolume(data[0].total_volume);
-  setSelectedCoinMarketCap(data[0].market_cap);
-  setSelectedCoinMarketCapRank(data[0].market_cap_rank);
-  // Dogecoin error handling for missing Total Supply Property
-  if (data[0].total_supply === null) {
-    setSelectedCoinSupply('N/A');
-  } else {
-    setSelectedCoinSupply(data[0].total_supply);
-  } // Error handling ends
-  setSelectedCoinDayLow(data[0].low_24h);
-  setSelectedCoinDayHigh(data[0].high_24h);
+  setSelectedCoin({
+    name: data.name,
+    image: data.image,
+    price: data.current_price,
+    priceChange: data.price_change_24h,
+    priceChangePercent: data.price_change_percentage_24h,
+    ath: data.ath,
+    atl: data.atl,
+    volume: data.total_volume,
+    marketCap: data.market_cap,
+    marketCapRank: data.market_cap_rank,
+    supply: data.total_supply,
+    dayLow: data.low_24h,
+    dayHigh: data.high_24h,
+  });
 }
 
 // METHOD TO DISPLAY CORRECT CURRENCY SYMBOL
@@ -107,41 +114,42 @@ const currencySymbol = (selectedCurrency) => {
         <div className="button-div">
           {coinData.map((coin) => {
             return (
-              <CoinButton 
-              key={coin.symbol} 
-              logo={coin.image} 
-              handleClick={handleClick}
-              currencyName={coin.name}
-              price={coin.current_price}
-              priceChange={coin.price_change_24h}
-              priceChangePercent={coin.price_change_percentage_24h}
-              dayLow={coin.low_24h}
-              dayHigh={coin.high_24h}
-              allTimeHigh={coin.ath}
-              allTimeLow={coin.atl}
-              volume={coin.total_volume}
-              marketCap={coin.market_cap}
-              marketCapRank={coin.market_cap_rank}
-              supply={coin.total_supply}
-              image={coin.image}
+              <CoinButton
+                key={coin.symbol}
+                logo={coin.image}
+                handleClick={handleClick}
+                currencyName={coin.name}
+                price={coin.current_price}
+                priceChange={coin.price_change_24h}
+                priceChangePercent={coin.price_change_percentage_24h}
+                dayLow={coin.low_24h}
+                dayHigh={coin.high_24h}
+                allTimeHigh={coin.ath}
+                allTimeLow={coin.atl}
+                volume={coin.total_volume}
+                marketCap={coin.market_cap}
+                marketCapRank={coin.market_cap_rank}
+                supply={coin.total_supply}
+                image={coin.image}
               />)
           })}         
         </div>
         <Results 
-          name={selectedCoinName.toString().toUpperCase()}
-          price={`${currencySymbol(selectedCurrency)}${selectedCoinPrice.toLocaleString()}`}
-          priceChange={`${currencySymbol(selectedCurrency)}${selectedCoinPriceChange.toLocaleString()}`}
-          priceChangePercent={`${selectedCoinPriceChangePercent.toLocaleString()}${'%'}`}
-          lowHigh={`${currencySymbol(selectedCurrency)}${selectedCoinDayLow.toLocaleString()} / ${currencySymbol(selectedCurrency)}${selectedCoinDayHigh.toLocaleString()}`}
-          allTimeHigh={`${currencySymbol(selectedCurrency)}${selectedCoinATH.toLocaleString()}`}
-          allTimeLow={`${currencySymbol(selectedCurrency)}${selectedCoinATL.toLocaleString()}`}
-          volume={selectedCoinVolume.toLocaleString()}
-          marketCap={selectedCoinMarketCap.toLocaleString()}
-          marketCapRank={selectedCoinMarketCapRank.toLocaleString()}
-          supply={selectedCoinSupply.toLocaleString()}
+          currencySymbol={currencySymbol}
+          name={selectedCoin.name.toUpperCase()}
+          price={`${currencySymbol(selectedCurrency)}${selectedCoin.price.toLocaleString()}`}
+          priceChange={`${selectedCoin.priceChange.toLocaleString()}`}
+          priceChangePercent={`${selectedCoin.priceChangePercent.toLocaleString()}%`}
+          lowHigh={`${selectedCoin.dayLow.toLocaleString()} / ${currencySymbol(selectedCurrency)}${selectedCoin.dayHigh.toLocaleString()}`}
+          allTimeHigh={`${selectedCoin.ath.toLocaleString()}`}
+          allTimeLow={`${selectedCoin.atl.toLocaleString()}`}
+          volume={selectedCoin.volume.toLocaleString()}
+          marketCap={selectedCoin.marketCap.toLocaleString()}
+          marketCapRank={selectedCoin.marketCapRank.toLocaleString()}
+          supply={selectedCoin.supply.toLocaleString()}
           selectedCurrency={selectedCurrency}
           setSelectedCurrency={setSelectedCurrency}
-          image={selectedCoinImage}
+          image={selectedCoin.image}
           />
           <BuyButton />
       </div> {/* WRAPPER ENDS */}
@@ -149,5 +157,4 @@ const currencySymbol = (selectedCurrency) => {
     </div>
   );
 }
-
 export default App;

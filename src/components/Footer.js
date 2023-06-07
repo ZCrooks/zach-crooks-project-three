@@ -1,3 +1,4 @@
+// FOOTER COMPONENT
 const Footer = () => {
     return (
         <footer>
