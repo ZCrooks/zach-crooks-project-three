@@ -1,38 +1,241 @@
-.App {
-  text-align: center;
+/* SETUP SNIPPET */
+html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
+
+html {font-size: 125%}
+img {max-width: 100%; display: block;}
+
+/* WRAPPER */
+.wrapper {
+  max-width: 1300px;
+  width: 95%;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* COLORS AND FONTS */
+body {
+  background-color: black;
+  font-family: 'Titillium Web', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 2.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+h1, h3, p, .default-text {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.default-text{
+  white-space: nowrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.stats-header{
+  font-size: 2rem;
+} 
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-right: 20px;
+  color: #85BB65;
+}
+
+.title,
+.footer-text {
+  color: #FFD705;
+}
+
+.title {
+  background-color: #900F0F;
+}
+
+.data {
+  background-color: black;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* RESULTS */
+.results {
+  background-color: #0B1043;
+  height: 90vh;
+  padding: 20px;
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+.button-div {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#crypto-button {
+  margin-right: 5px;
+}
+
+.price-currency-div {
+  display: flex;
+  align-items: center;
+}
+
+.stats {
+  margin: 20px;
+  width: 50%;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.title {
+  width: 25%;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-bottom: 20px;
+}
+
+.vital-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.img-container {
+  height: 45vh;
+  width: 50%;
+  margin-right: 20px;
+  background-color: #202124;
+  display: grid;
+  place-items: center;
+}
+
+/* BUY/SELL BUTTON  */
+.buy-sell-button {
+  background-color: #05112E;
+  border-radius: 10px;
+  border: 1px solid #9E9966;
+  padding: 20px;
+  color: white;
+  display: block;
+  width: 40%;
+  text-align: center;
+  margin: auto;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.buy-sell-button:hover {
+  background-color: #85BB65;
+  color: black;
+}
+
+.buy-sell-button:focus {
+  background-color: #85BB65;
+  color: black;
+}
+
+/* FOOTER */
+footer {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  background-color: #900F0F;
+  margin-top: 30px;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 800px) {
+  .button-div {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  to {
-    transform: rotate(360deg);
+  #crypto-button {
+    max-width: 100px;
+    margin: 5px;
+  }
+  .default-text {
+    font-size: 0.8rem;
   }
 }
+
+@media (max-width: 750px) {
+  .data {
+    justify-content: start;
+  }
+  .default-text{
+    font-size: 0.6rem;
+  }
+  .stats-header {
+    font-size: 1.3rem;
+  }
+  .stats-text {
+    font-size: 0.8rem;
+  }
+  .img-container {
+    padding: 20px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+  }
+  .data {
+    flex-direction: column-reverse;
+  }
+  h1 {
+    margin-bottom: auto;
+  }
+  .stats {
+    padding-top: 0;
+    width: 75%;
+  }
+  .stats-text {
+    font-size: 0.7rem;
+  }
+  .stats-header {
+    font-size: 1.2rem;
+  }
+  .vital-info {
+    flex-direction: column;
+  }
+  .title { 
+    width: 100%;
+  }
+  .img-container {
+    width: 25%;
+  }
+}
+
+@media (max-width: 350px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
